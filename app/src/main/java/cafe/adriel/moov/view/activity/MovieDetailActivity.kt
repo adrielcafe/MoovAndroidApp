@@ -6,15 +6,15 @@ import cafe.adriel.moov.R
 import cafe.adriel.moov.contract.MovieContract
 import cafe.adriel.moov.model.entity.Movie
 import com.tinsuke.icekick.extension.parcelLateState
-import kotlinx.android.synthetic.main.activity_movie.*
+import kotlinx.android.synthetic.main.activity_movie_detail.*
 
-class MovieActivity: BaseActivity(), MovieContract.IMovieView {
+class MovieDetailActivity : BaseActivity(), MovieContract.IMovieView {
 
     private var movie: Movie by parcelLateState()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie)
+        setContentView(R.layout.activity_movie_detail)
 
         movie = intent.getParcelableExtra(Constant.EXTRA_MOVIE)
 

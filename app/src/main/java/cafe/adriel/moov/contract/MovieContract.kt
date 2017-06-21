@@ -10,12 +10,13 @@ sealed class MovieContract {
 
     interface IMovieListView {
         fun showMovies(movies: List<Movie>)
-        fun openMovie(movie: Movie)
+        fun showMovie(movie: Movie)
+        fun showMovieDetails()
     }
 
     interface IMovieListPresenter {
-        fun loadMovies(page: Int): List<Movie>
-        fun searchMovies(query: String, page: Int): List<Movie>
+        fun loadMovies(page: Int)
+        fun searchMovies(query: String, page: Int)
     }
 
     interface IMovieRepository {

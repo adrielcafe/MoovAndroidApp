@@ -2,4 +2,6 @@
 
     <string name="app_name" translatable="false">Moov</string>
 
+    <string name="more">More</string>
+
 </resources>

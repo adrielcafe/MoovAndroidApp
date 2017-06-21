@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cafe.adriel.moov.view.activity.MovieListActivity">
+    tools:context="cafe.adriel.moov.view.activity.MovieDetailActivity">
 
     <TextView
         android:id="@+id/vHello"
