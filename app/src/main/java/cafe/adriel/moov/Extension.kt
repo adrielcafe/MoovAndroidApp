@@ -1,8 +1,21 @@
 package cafe.adriel.moov
 
-import java.text.SimpleDateFormat
+import android.content.Context
+import android.graphics.Color
+import android.view.MenuItem
+import android.widget.Toast
+import com.joanzapata.iconify.Icon
+import com.joanzapata.iconify.IconDrawable
+import java.text.DateFormat
 import java.util.*
 
-private val DATE_FORMAT = SimpleDateFormat("dd MMM yyyy", Locale.US)
+fun Date.toFormattedString(): String =
+        DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US).format(this)
 
-fun Date.toFormattedString(): String = DATE_FORMAT.format(this)
+fun MenuItem.setFontIcon(icon: Icon) =
+        setIcon(IconDrawable(App.context, icon)
+                .color(Color.WHITE)
+                .sizeDp(24))!!
+
+fun Context.showToast(message: String) =
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

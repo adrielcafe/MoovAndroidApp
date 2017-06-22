@@ -9,8 +9,4 @@ class MovieListPresenter(val view : MovieContract.IMovieListView): MovieContract
         view.showMovies(MovieRepository.getMovies(page))
     }
 
-    override fun searchMovies(query: String, page: Int) {
-        // TODO
-    }
-
 }

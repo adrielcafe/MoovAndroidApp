@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     tools:context="cafe.adriel.moov.view.activity.MovieDetailActivity">
 
     <FrameLayout
@@ -51,7 +50,7 @@
                     android:layout_width="130dp"
                     android:layout_height="195dp"
                     android:scaleType="centerCrop"
-                    android:background="@color/accent"
+                    android:background="@color/colorAccent"
                     android:elevation="10dp"/>
 
                 <android.support.v7.widget.LinearLayoutCompat

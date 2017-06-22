@@ -6,8 +6,6 @@ import com.tinsuke.icekick.extension.freezeInstanceState
 import com.tinsuke.icekick.extension.unfreezeInstanceState
 import io.reactivex.disposables.CompositeDisposable
 
-
-
 abstract class BaseActivity: AppCompatActivity() {
     protected val disposables = CompositeDisposable()
 

@@ -24,6 +24,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.activity.SearchActivity"
+            android:parentActivityName=".view.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".view.activity.MovieDetailActivity"
             android:parentActivityName=".view.activity.MainActivity"
             android:screenOrientation="portrait"/>

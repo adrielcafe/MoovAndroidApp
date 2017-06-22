@@ -7,13 +7,14 @@ import cafe.adriel.moov.Constant
 import cafe.adriel.moov.R
 import cafe.adriel.moov.contract.MovieContract
 import cafe.adriel.moov.model.entity.Movie
+import cafe.adriel.moov.showToast
 import cafe.adriel.moov.toFormattedString
 import com.bumptech.glide.Glide
 import com.joanzapata.iconify.fonts.MaterialIcons
 import com.tinsuke.icekick.extension.parcelLateState
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
-class MovieDetailActivity : BaseActivity(), MovieContract.IMovieView {
+class MovieDetailActivity: BaseActivity(), MovieContract.IMovieView {
 
     private var movie: Movie by parcelLateState()
 
@@ -23,8 +24,11 @@ class MovieDetailActivity : BaseActivity(), MovieContract.IMovieView {
 
         movie = intent.getParcelableExtra(Constant.EXTRA_MOVIE)
 
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        supportActionBar?.title = null
+        supportActionBar?.run {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setDisplayHomeAsUpEnabled(true)
+            title = null
+        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -45,6 +49,10 @@ class MovieDetailActivity : BaseActivity(), MovieContract.IMovieView {
                     .load(backdropImageUrl)
                     .into(vBackdrop)
         }
+    }
+
+    override fun showError(error: String) {
+        showToast(error)
     }
 
 }

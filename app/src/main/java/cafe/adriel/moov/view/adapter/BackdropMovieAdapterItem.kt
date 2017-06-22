@@ -7,13 +7,13 @@ import cafe.adriel.moov.R
 import cafe.adriel.moov.model.entity.Movie
 import com.bumptech.glide.Glide
 import com.mikepenz.fastadapter.items.AbstractItem
-import kotlinx.android.synthetic.main.list_item_movie.view.*
+import kotlinx.android.synthetic.main.list_item_backdrop_movie.view.*
 
-class MovieAdapterItem(val movie : Movie): AbstractItem<MovieAdapterItem, MovieAdapterItem.ViewHolder>() {
+class BackdropMovieAdapterItem(val movie : Movie): AbstractItem<BackdropMovieAdapterItem, BackdropMovieAdapterItem.ViewHolder>() {
 
     override fun getType() = layoutRes
 
-    override fun getLayoutRes() = R.layout.list_item_movie
+    override fun getLayoutRes() = R.layout.list_item_backdrop_movie
 
     override fun getViewHolder(v: View?) = ViewHolder(v!!)
 
@@ -28,7 +28,9 @@ class MovieAdapterItem(val movie : Movie): AbstractItem<MovieAdapterItem, MovieA
 
     override fun unbindView(holder: ViewHolder?) {
         super.unbindView(holder)
-
+        with(holder?.itemView!!){
+            Glide.clear(vBackdrop)
+        }
     }
 
     class ViewHolder(v: View): RecyclerView.ViewHolder(v)
