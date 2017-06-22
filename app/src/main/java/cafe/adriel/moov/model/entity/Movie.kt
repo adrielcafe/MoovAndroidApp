@@ -1,12 +1,19 @@
 package cafe.adriel.moov.model.entity
 
+import com.google.gson.annotations.SerializedName
 import io.mironov.smuggler.AutoParcelable
 import java.util.*
 
 data class Movie(
-        val name: String,
-        val posterImageUrl: String,
-        val backdropImageUrl: String,
-        val overview: String,
-        val genre: String,
-        val releaseDate: Date) : AutoParcelable
+        @SerializedName("title")
+        val name: String?,
+        @SerializedName("overview")
+        val overview: String?,
+        @SerializedName("poster_path")
+        val posterImageUrl: String?,
+        @SerializedName("backdrop_path")
+        val backdropImageUrl: String?,
+        @SerializedName("genre_ids")
+        val genre: List<Int>?,
+        @SerializedName("release_date")
+        val releaseDate: Date?) : AutoParcelable

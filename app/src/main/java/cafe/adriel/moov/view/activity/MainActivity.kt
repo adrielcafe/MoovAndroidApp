@@ -76,6 +76,11 @@ class MainActivity: BaseActivity(), MovieContract.IMovieListView {
         presenter.loadMovies(1)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
 
@@ -116,8 +121,8 @@ class MainActivity: BaseActivity(), MovieContract.IMovieListView {
         currentMovie = movie
         currentMovie?.run {
             vName.text = name
-            vGenre.text = genre
-            vReleaseDate.text = "{${MaterialIcons.md_access_time.key()}} ${releaseDate.toFormattedString()}"
+            vGenre.text = Constant.TMDB_GENRES[genre!![0]]
+            vReleaseDate.text = "{${MaterialIcons.md_access_time.key()}} ${releaseDate?.toFormattedString()}"
             vMore.visibility = View.VISIBLE
             Glide.with(this@MainActivity)
                     .load(posterImageUrl)

@@ -1,27 +1,52 @@
 package cafe.adriel.moov.model.repository
 
+import cafe.adriel.moov.Constant
 import cafe.adriel.moov.contract.MovieContract
-import cafe.adriel.moov.model.entity.Movie
-import java.util.*
+import cafe.adriel.moov.model.entity.MovieResponse
+import io.reactivex.Flowable
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 object MovieRepository: MovieContract.IMovieRepository {
 
-    // TODO
-    val DUMMY_MOVIES = listOf(
-            Movie("Miss Peregrine's Home for Peculiar Children", "https://image.tmdb.org/t/p/original/AvekzUdI8HZnImdQulmTTmAZXrC.jpg", "https://image.tmdb.org/t/p/original/cMcPIr5PV5bXIt7FrG6qcPfaKj2.jpg", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.", "Action", Date()),
-            Movie("Split", "https://image.tmdb.org/t/p/original/rXMWOZiCt6eMX22jWuTOSdQ98bY.jpg", "https://image.tmdb.org/t/p/original/3na3Y4PM4uB4vKrrzp5nhzxaOn9.jpg", "Lorem ipsum", "Action", Date()),
-            Movie("Deadpool", "https://image.tmdb.org/t/p/original/inVq3FRqcYIRl2la8iZikYYxFNR.jpg", "https://image.tmdb.org/t/p/original/laLIVlJpqNirs95R3eHrSh0oz5X.jpg", "Lorem ipsum", "Action", Date()),
-            Movie("Captain America: Civil War", "https://image.tmdb.org/t/p/original/kSBXou5Ac7vEqKd97wotJumyJvU.jpg", "https://image.tmdb.org/t/p/original/kliBz01JG89tsj1om0Z6T1ZOCV.jpg", "Lorem ipsum", "Action", Date()),
-            Movie("Fantastic Beasts and Where to Find Them", "https://image.tmdb.org/t/p/original/gri0DDxsERr6B2sOR1fGLxLpSLx.jpg", "https://image.tmdb.org/t/p/original/bzfiQ0sYsLo6kzeP1DntXxZ4quD.jpg", "Lorem ipsum", "Action", Date()))
+    private val service: IService
 
-    override fun getMovies(page: Int): List<Movie> {
-        // TODO
-        return DUMMY_MOVIES
+    init {
+        val retrofit = Retrofit.Builder()
+                .baseUrl(Constant.TMDB_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+        service = retrofit.create<IService>(IService::class.java)
     }
 
-    override fun getSearchMovies(query: String, page: Int): List<Movie> {
-        // TODO
-        return DUMMY_MOVIES
+    override fun getUpcomingMovies(page: Int) =
+            service.getUpcomingMovies(Constant.TMDB_KEY, Constant.TMDB_LANGUAGE, Constant.TMDB_REGION, page)
+
+    override fun getSearchMovies(query: String, page: Int) =
+            service.getSearchMovies(Constant.TMDB_KEY, Constant.TMDB_LANGUAGE, Constant.TMDB_REGION, false, query, page)
+
+    private interface IService {
+
+        @GET("movie/upcoming")
+        fun getUpcomingMovies(
+                @Query("api_key") key : String,
+                @Query("language") language : String,
+                @Query("region") region : String,
+                @Query("page") page : Int): Flowable<MovieResponse>
+
+        @GET("search/movie")
+        fun getSearchMovies(
+                @Query("api_key") key : String,
+                @Query("language") language : String,
+                @Query("region") region : String,
+                @Query("include_adult") includeAdult : Boolean,
+                @Query("query") query : String,
+                @Query("page") page : Int): Flowable<MovieResponse>
+
     }
 
 }

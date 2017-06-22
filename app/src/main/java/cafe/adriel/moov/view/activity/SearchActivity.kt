@@ -47,7 +47,7 @@ class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
         with(adapter) {
             withSelectable(false)
             withOnClickListener { v, adapter, item, position ->
-                showMovie(item.movie)
+                showMovieDetails(item.movie)
                 true
             }
         }
@@ -67,6 +67,11 @@ class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
                 }
             })
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -103,7 +108,7 @@ class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
                 .addTo(disposables)
     }
 
-    override fun showMovie(movie: Movie) {
+    override fun showMovieDetails(movie: Movie) {
         val i = Intent(this, MovieDetailActivity::class.java)
         i.putExtra(Constant.EXTRA_MOVIE, movie)
         startActivity(i)

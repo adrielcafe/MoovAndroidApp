@@ -6,4 +6,8 @@ sealed class BaseContract {
         fun showError(error: String)
     }
 
+    interface IPresenterView {
+        fun onDestroy()
+    }
+
 }

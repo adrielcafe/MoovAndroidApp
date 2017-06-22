@@ -40,8 +40,8 @@ class MovieDetailActivity: BaseActivity(), MovieContract.IMovieView {
         movie?.run {
             vName.text = name
             vOverview.text = overview
-            vGenre.text = "{${MaterialIcons.md_local_offer.key()}} ${genre}"
-            vReleaseDate.text = "{${MaterialIcons.md_access_time.key()}} ${releaseDate.toFormattedString()}"
+            vGenre.text = "{${MaterialIcons.md_local_offer.key()}} ${Constant.TMDB_GENRES[genre!![0]]}"
+            vReleaseDate.text = "{${MaterialIcons.md_access_time.key()}} ${releaseDate?.toFormattedString()}"
             Glide.with(this@MovieDetailActivity)
                     .load(posterImageUrl)
                     .into(vPoster)

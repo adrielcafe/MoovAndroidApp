@@ -1,6 +1,8 @@
 package cafe.adriel.moov.contract
 
 import cafe.adriel.moov.model.entity.Movie
+import cafe.adriel.moov.model.entity.MovieResponse
+import io.reactivex.Flowable
 
 sealed class MovieContract {
 
@@ -17,20 +19,20 @@ sealed class MovieContract {
 
     interface IMovieSearchView: BaseContract.IBaseView {
         fun showMovies(movies: List<Movie>)
-        fun showMovie(movie: Movie)
+        fun showMovieDetails(movie: Movie)
     }
 
-    interface IMovieListPresenter {
+    interface IMovieListPresenter: BaseContract.IPresenterView {
         fun loadMovies(page: Int)
     }
 
-    interface IMovieSearchPresenter {
+    interface IMovieSearchPresenter: BaseContract.IPresenterView {
         fun searchMovies(query: String, page: Int)
     }
 
     interface IMovieRepository {
-        fun getMovies(page: Int): List<Movie>
-        fun getSearchMovies(query: String, page: Int): List<Movie>
+        fun getUpcomingMovies(page: Int): Flowable<MovieResponse>
+        fun getSearchMovies(query: String, page: Int): Flowable<MovieResponse>
     }
 
 }
