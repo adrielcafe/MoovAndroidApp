@@ -5,7 +5,7 @@ import cafe.adriel.moov.model.entity.Movie
 sealed class MovieContract {
 
     interface IMovieView {
-        fun showMovie(movie: Movie)
+        fun showMovie()
     }
 
     interface IMovieListView {

@@ -1,11 +1,13 @@
 package cafe.adriel.moov.view.activity
 
+import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import cafe.adriel.moov.Constant
 import cafe.adriel.moov.R
 import cafe.adriel.moov.contract.MovieContract
 import cafe.adriel.moov.model.entity.Movie
@@ -21,6 +23,7 @@ import io.reactivex.rxkotlin.toObservable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : BaseActivity(), MovieContract.IMovieListView {
     lateinit var presenter : MovieContract.IMovieListPresenter
     lateinit var adapter : FastItemAdapter<MovieAdapterItem>
@@ -32,7 +35,11 @@ class MainActivity : BaseActivity(), MovieContract.IMovieListView {
 
         presenter = MovieListPresenter(this)
 
-        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        setSupportActionBar(vToolbar)
+        supportActionBar?.title = null
+        vAppName.typeface = Typeface.createFromAsset(assets, "fonts/Megrim.ttf")
+        vAppbar.setBackgroundColor(Color.TRANSPARENT)
+        vAppbar.bringToFront()
 
         vMore.setOnClickListener {
             showMovieDetails()
@@ -88,8 +95,10 @@ class MainActivity : BaseActivity(), MovieContract.IMovieListView {
     }
 
     override fun showMovieDetails() {
-        currentMovie?.run {
-
+        currentMovie?.let {
+            val i = Intent(this@MainActivity, MovieDetailActivity::class.java)
+            i.putExtra(Constant.EXTRA_MOVIE, it)
+            startActivity(i)
         }
     }
 

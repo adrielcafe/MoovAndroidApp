@@ -1,19 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="cafe.adriel.moov.view.activity.MovieDetailActivity">
 
-    <TextView
-        android:id="@+id/vHello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+        <com.github.florent37.diagonallayout.DiagonalLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_gravity="top"
+            android:elevation="5dp"
+            app:diagonal_angle="10"
+            app:diagonal_direction="right"
+            app:diagonal_position="bottom">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/vBackdrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@color/colorPrimaryDark"/>
+
+        </com.github.florent37.diagonallayout.DiagonalLayout>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:orientation="vertical"
+            android:translationZ="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="top|start">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/vPoster"
+                    android:layout_width="130dp"
+                    android:layout_height="195dp"
+                    android:scaleType="centerCrop"
+                    android:background="@color/accent"
+                    android:elevation="10dp"/>
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/vPoster"
+                    android:layout_alignBottom="@id/vPoster"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
+
+                    <com.joanzapata.iconify.widget.IconTextView
+                        android:id="@+id/vGenre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:maxLines="1"
+                        android:textColor="@android:color/white"
+                        android:ellipsize="end"
+                        app:textAllCaps="true"/>
+
+                    <com.joanzapata.iconify.widget.IconTextView
+                        android:id="@+id/vReleaseDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:maxLines="1"
+                        android:textColor="@android:color/white"
+                        android:ellipsize="end"
+                        app:textAllCaps="true"/>
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/vName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@android:color/white"
+                android:fontFamily="sans-serif-black"
+                app:textAllCaps="true"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/vOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@android:color/white"
+                android:fontFamily="serif"/>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </FrameLayout>
+
+</ScrollView>

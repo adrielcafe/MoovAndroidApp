@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resConfigs "en"
     }
     buildTypes {
         release {
@@ -47,6 +48,7 @@ dependencies {
 
     // View
     compile 'com.joanzapata.iconify:android-iconify-material:2.2.2'
+    compile 'com.github.florent37:diagonallayout:1.0.4'
 
     // Util
     implementation 'com.github.tinsukE:icekick:0.2'
