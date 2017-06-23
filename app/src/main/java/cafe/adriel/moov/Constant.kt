@@ -4,7 +4,7 @@ object Constant {
 
     const val EXTRA_MOVIE = "movie"
 
-    const val TMDB_KEY = "1f54bd990f1cdfb230adb312546d765d"
+    const val TMDB_KEY = "ADD_HERE"
     const val TMDB_API_BASE_URL = "https://api.themoviedb.org/3/"
     const val TMDB_POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342/"
     const val TMDB_BACKDROP_BASE_URL = "https://image.tmdb.org/t/p/w300"
