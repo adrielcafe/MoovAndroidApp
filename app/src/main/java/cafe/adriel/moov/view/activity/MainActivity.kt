@@ -125,9 +125,11 @@ class MainActivity: BaseActivity(), MovieContract.IMovieListView {
             vName.text = name
             vMore.visibility = View.VISIBLE
             genres?.let {
-                vGenre.text = "{md-local-offer} ${Util.getGenres(genres)}"
+                if (it.isNotEmpty()) {
+                    vGenre.text = "{md-local-offer} ${Util.getGenres(genres)}"
+                }
             }
-            releaseDate?.let {
+            releaseDate?.toDate()?.let {
                 vReleaseDate.text = "{md-access-time} ${it.toFormattedString()}"
             }
             posterImagePath?.let {

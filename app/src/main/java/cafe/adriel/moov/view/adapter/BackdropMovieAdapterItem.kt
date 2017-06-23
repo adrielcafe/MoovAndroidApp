@@ -3,7 +3,6 @@ package cafe.adriel.moov.view.adapter
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import cafe.adriel.moov.App
-import cafe.adriel.moov.Constant
 import cafe.adriel.moov.R
 import cafe.adriel.moov.Util
 import cafe.adriel.moov.model.entity.Movie

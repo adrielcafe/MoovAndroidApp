@@ -47,13 +47,13 @@ class MovieDetailActivity: BaseActivity(), MovieContract.IMovieView {
         movie?.run {
             vName.text = name
             vOverview.text = overview
-            releaseDate?.let {
-                vReleaseDate.text = "{md-access-time} ${it.toFormattedString()}"
-            }
             genres?.let {
                 if (it.isNotEmpty()) {
                     vGenre.text = "{md-local-offer} ${Util.getGenres(genres)}"
                 }
+            }
+            releaseDate?.toDate()?.let {
+                vReleaseDate.text = "{md-access-time} ${it.toFormattedString()}"
             }
             posterImagePath?.let {
                 Glide.with(this@MovieDetailActivity)

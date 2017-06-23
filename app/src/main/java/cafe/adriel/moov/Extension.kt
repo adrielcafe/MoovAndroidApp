@@ -7,7 +7,16 @@ import android.widget.Toast
 import com.joanzapata.iconify.Icon
 import com.joanzapata.iconify.IconDrawable
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
+
+fun String.toDate(): Date? {
+    try {
+        return SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(this)
+    } catch (e: Exception){
+        return null
+    }
+}
 
 fun Date.toFormattedString(): String =
         DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.US).format(this)
