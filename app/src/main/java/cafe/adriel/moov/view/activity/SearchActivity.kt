@@ -2,10 +2,12 @@ package cafe.adriel.moov.view.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.Menu
+import android.view.View
 import cafe.adriel.moov.Constant
 import cafe.adriel.moov.R
 import cafe.adriel.moov.contract.MovieContract
@@ -24,7 +26,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_search.*
 
 
-class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
+class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView {
     lateinit var presenter: MovieContract.IMovieSearchPresenter
     lateinit var adapter: FastItemAdapter<SearchMovieAdapterItem>
     lateinit var loadingAdapter: FooterAdapter<ProgressItem>
@@ -47,7 +49,7 @@ class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
         with(adapter) {
             withSelectable(false)
             withOnClickListener { v, adapter, item, position ->
-                showMovieDetails(item.movie)
+                showMovieDetails(item.movie, v.findViewById(R.id.vPoster))
                 true
             }
         }
@@ -109,10 +111,11 @@ class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
         loadingAdapter.clear()
     }
 
-    override fun showMovieDetails(movie: Movie) {
-        val i = Intent(this, MovieDetailActivity::class.java)
-        i.putExtra(Constant.EXTRA_MOVIE, movie)
-        startActivity(i)
+    override fun showMovieDetails(movie: Movie, sharedView: View) {
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, sharedView, "poster")
+        val intent = Intent(this, MovieDetailActivity::class.java)
+        intent.putExtra(Constant.EXTRA_MOVIE, movie)
+        startActivity(intent, options.toBundle())
     }
 
     override fun showError(error: String) {

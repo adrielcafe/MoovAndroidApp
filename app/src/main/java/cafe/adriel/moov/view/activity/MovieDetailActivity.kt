@@ -3,6 +3,7 @@ package cafe.adriel.moov.view.activity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.MenuItem
 import cafe.adriel.moov.*
 import cafe.adriel.moov.contract.MovieContract
 import cafe.adriel.moov.model.entity.Movie
@@ -32,6 +33,16 @@ class MovieDetailActivity: BaseActivity(), MovieContract.IMovieView {
         showMovie()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                supportFinishAfterTransition()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun showMovie() {
         movie?.run {
             vName.text = name
@@ -47,7 +58,7 @@ class MovieDetailActivity: BaseActivity(), MovieContract.IMovieView {
             posterImagePath?.let {
                 Glide.with(this@MovieDetailActivity)
                         .load(Util.getPosterImageUrl(it))
-                        .placeholder(Constant.imagePlaceholder)
+                        .dontAnimate()
                         .into(vPoster)
             }
             backdropImagePath?.let {

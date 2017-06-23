@@ -3,6 +3,7 @@ package cafe.adriel.moov.view.activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
@@ -139,9 +140,10 @@ class MainActivity: BaseActivity(), MovieContract.IMovieListView {
 
     override fun showMovieDetails() {
         currentMovie?.let {
-            val i = Intent(this@MainActivity, MovieDetailActivity::class.java)
-            i.putExtra(Constant.EXTRA_MOVIE, it)
-            startActivity(i)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, vPoster, "poster")
+            val intent = Intent(this@MainActivity, MovieDetailActivity::class.java)
+            intent.putExtra(Constant.EXTRA_MOVIE, it)
+            startActivity(intent, options.toBundle())
         }
     }
 

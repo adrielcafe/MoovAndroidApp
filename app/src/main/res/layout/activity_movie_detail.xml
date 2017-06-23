@@ -50,8 +50,8 @@
                     android:layout_width="130dp"
                     android:layout_height="195dp"
                     android:scaleType="centerCrop"
-                    android:background="@color/colorAccent"
-                    android:elevation="10dp"/>
+                    android:elevation="10dp"
+                    android:transitionName="poster"/>
 
                 <android.support.v7.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"

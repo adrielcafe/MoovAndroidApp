@@ -14,6 +14,7 @@
         android:id="@+id/vPoster"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:transitionName="poster"/>
 
 </android.support.v7.widget.CardView>

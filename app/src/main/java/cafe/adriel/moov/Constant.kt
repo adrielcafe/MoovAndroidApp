@@ -1,12 +1,6 @@
 package cafe.adriel.moov
 
-import android.graphics.drawable.ColorDrawable
-import android.support.v4.content.res.ResourcesCompat
-
 object Constant {
-
-    val imagePlaceholder = ColorDrawable(ResourcesCompat.getColor(
-            App.context.resources, R.color.colorAccent, null))
 
     const val EXTRA_MOVIE = "movie"
 

@@ -25,7 +25,6 @@ class BackdropMovieAdapterItem(val movie : Movie): AbstractItem<BackdropMovieAda
             movie.backdropImagePath?.let {
                 Glide.with(App.context)
                         .load(Util.getBackdropImageUrl(it))
-                        .placeholder(Constant.imagePlaceholder)
                         .into(vBackdrop)
             }
         }

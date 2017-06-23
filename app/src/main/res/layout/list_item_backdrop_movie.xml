@@ -8,7 +8,7 @@
     app:cardUseCompatPadding="true"
     app:cardElevation="4dp"
     app:cardCornerRadius="4dp"
-    app:cardBackgroundColor="@color/colorAccent">
+    app:cardBackgroundColor="@android:color/transparent">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/vBackdrop"
