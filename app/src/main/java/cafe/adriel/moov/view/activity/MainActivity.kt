@@ -20,6 +20,7 @@ import com.mikepenz.fastadapter.adapters.FooterAdapter
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 import com.mikepenz.fastadapter_extensions.items.ProgressItem
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener
+import com.tinsuke.icekick.extension.parcelState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.toObservable
@@ -27,10 +28,11 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: BaseActivity(), MovieContract.IMovieListView {
-    lateinit var presenter: MovieContract.IMovieListPresenter
-    lateinit var adapter: FastItemAdapter<BackdropMovieAdapterItem>
-    lateinit var loadingAdapter: FooterAdapter<ProgressItem>
-    var currentMovie: Movie? = null
+    private lateinit var presenter: MovieContract.IMovieListPresenter
+    private lateinit var adapter: FastItemAdapter<BackdropMovieAdapterItem>
+    private lateinit var loadingAdapter: FooterAdapter<ProgressItem>
+
+    private var currentMovie: Movie? by parcelState()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

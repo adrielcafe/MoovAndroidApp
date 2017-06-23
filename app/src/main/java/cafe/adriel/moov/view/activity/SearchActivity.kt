@@ -19,6 +19,7 @@ import com.mikepenz.fastadapter.adapters.FooterAdapter
 import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter
 import com.mikepenz.fastadapter_extensions.items.ProgressItem
 import com.mikepenz.fastadapter_extensions.scroll.EndlessRecyclerOnScrollListener
+import com.tinsuke.icekick.extension.serialState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.toObservable
@@ -27,10 +28,11 @@ import kotlinx.android.synthetic.main.activity_search.*
 
 
 class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView {
-    lateinit var presenter: MovieContract.IMovieSearchPresenter
-    lateinit var adapter: FastItemAdapter<SearchMovieAdapterItem>
-    lateinit var loadingAdapter: FooterAdapter<ProgressItem>
-    var currentQuery: String? = null
+    private lateinit var presenter: MovieContract.IMovieSearchPresenter
+    private lateinit var adapter: FastItemAdapter<SearchMovieAdapterItem>
+    private lateinit var loadingAdapter: FooterAdapter<ProgressItem>
+
+    private var currentQuery: String? by serialState()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
