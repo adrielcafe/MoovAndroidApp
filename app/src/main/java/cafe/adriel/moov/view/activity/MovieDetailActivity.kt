@@ -3,14 +3,10 @@ package cafe.adriel.moov.view.activity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import cafe.adriel.moov.Constant
-import cafe.adriel.moov.R
+import cafe.adriel.moov.*
 import cafe.adriel.moov.contract.MovieContract
 import cafe.adriel.moov.model.entity.Movie
-import cafe.adriel.moov.showToast
-import cafe.adriel.moov.toFormattedString
 import com.bumptech.glide.Glide
-import com.joanzapata.iconify.fonts.MaterialIcons
 import com.tinsuke.icekick.extension.parcelLateState
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
@@ -40,14 +36,25 @@ class MovieDetailActivity: BaseActivity(), MovieContract.IMovieView {
         movie?.run {
             vName.text = name
             vOverview.text = overview
-            vGenre.text = "{${MaterialIcons.md_local_offer.key()}} ${Constant.TMDB_GENRES[genre!![0]]}"
-            vReleaseDate.text = "{${MaterialIcons.md_access_time.key()}} ${releaseDate?.toFormattedString()}"
-            Glide.with(this@MovieDetailActivity)
-                    .load(posterImageUrl)
-                    .into(vPoster)
-            Glide.with(this@MovieDetailActivity)
-                    .load(backdropImageUrl)
-                    .into(vBackdrop)
+            releaseDate?.let {
+                vReleaseDate.text = "{md-access-time} ${it.toFormattedString()}"
+            }
+            genres?.let {
+                if (it.isNotEmpty()) {
+                    vGenre.text = "{md-local-offer} ${Util.getGenres(genres)}"
+                }
+            }
+            posterImagePath?.let {
+                Glide.with(this@MovieDetailActivity)
+                        .load(Util.getPosterImageUrl(it))
+                        .placeholder(Constant.imagePlaceholder)
+                        .into(vPoster)
+            }
+            backdropImagePath?.let {
+                Glide.with(this@MovieDetailActivity)
+                        .load(Util.getBackdropImageUrl(it))
+                        .into(vBackdrop)
+            }
         }
     }
 

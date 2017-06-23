@@ -59,16 +59,6 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/vGenre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:maxLines="1"
-                android:textColor="@android:color/white"
-                android:ellipsize="end"
-                app:textAllCaps="true"/>
-
-            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/vName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,6 +71,16 @@
                 app:autoSizeMinTextSize="24sp"
                 app:autoSizeMaxTextSize="34sp"
                 app:autoSizeStepGranularity="2sp"
+                app:textAllCaps="true"/>
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:id="@+id/vGenre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:ellipsize="end"
                 app:textAllCaps="true"/>
 
             <com.joanzapata.iconify.widget.IconTextView

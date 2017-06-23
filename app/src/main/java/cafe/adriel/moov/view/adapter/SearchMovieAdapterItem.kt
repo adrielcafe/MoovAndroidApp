@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import cafe.adriel.moov.App
 import cafe.adriel.moov.R
+import cafe.adriel.moov.Util
 import cafe.adriel.moov.model.entity.Movie
 import com.bumptech.glide.Glide
 import com.mikepenz.fastadapter.items.AbstractItem
@@ -20,16 +21,18 @@ class SearchMovieAdapterItem(val movie : Movie): AbstractItem<SearchMovieAdapter
     override fun bindView(holder: ViewHolder?, payloads: MutableList<Any>?) {
         super.bindView(holder, payloads)
         with(holder?.itemView!!){
-            Glide.with(App.context)
-                    .load(movie.backdropImageUrl)
-                    .into(vBackdrop)
+            movie.posterImagePath?.let {
+                Glide.with(App.context)
+                        .load(Util.getPosterImageUrl(it))
+                        .into(vPoster)
+            }
         }
     }
 
     override fun unbindView(holder: ViewHolder?) {
         super.unbindView(holder)
         with(holder?.itemView!!){
-            Glide.clear(vBackdrop)
+            Glide.clear(vPoster)
         }
     }
 

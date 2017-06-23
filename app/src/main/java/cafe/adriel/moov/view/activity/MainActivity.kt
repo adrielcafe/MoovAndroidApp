@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity: BaseActivity(), MovieContract.IMovieListView {
     lateinit var presenter: MovieContract.IMovieListPresenter
     lateinit var adapter: FastItemAdapter<BackdropMovieAdapterItem>
-    lateinit var footerAdapter: FooterAdapter<ProgressItem>
+    lateinit var loadingAdapter: FooterAdapter<ProgressItem>
     var currentMovie: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class MainActivity: BaseActivity(), MovieContract.IMovieListView {
         }
 
         adapter = FastItemAdapter()
-        footerAdapter = FooterAdapter<ProgressItem>()
+        loadingAdapter = FooterAdapter<ProgressItem>()
         with(adapter) {
             withSelectable(false)
             withOnClickListener { v, adapter, item, position ->
@@ -59,12 +59,12 @@ class MainActivity: BaseActivity(), MovieContract.IMovieListView {
         with(vMovies){
             layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             itemAnimator = DefaultItemAnimator()
-            adapter = footerAdapter.wrap(this@MainActivity.adapter)
+            adapter = loadingAdapter.wrap(this@MainActivity.adapter)
             setHasFixedSize(true)
-            addOnScrollListener(object: EndlessRecyclerOnScrollListener(footerAdapter){
+            addOnScrollListener(object: EndlessRecyclerOnScrollListener(loadingAdapter){
                 override fun onLoadMore(currentPage: Int) {
-                    footerAdapter.clear()
-                    footerAdapter.add(ProgressItem().withEnabled(false))
+                    loadingAdapter.clear()
+                    loadingAdapter.add(ProgressItem().withEnabled(false))
                     presenter.loadMovies(currentPage)
                 }
             })
@@ -115,18 +115,25 @@ class MainActivity: BaseActivity(), MovieContract.IMovieListView {
                     }
                 }
                 .addTo(disposables)
+        loadingAdapter.clear()
     }
 
     override fun showMovie(movie: Movie) {
         currentMovie = movie
         currentMovie?.run {
             vName.text = name
-            vGenre.text = Constant.TMDB_GENRES[genre!![0]]
-            vReleaseDate.text = "{${MaterialIcons.md_access_time.key()}} ${releaseDate?.toFormattedString()}"
             vMore.visibility = View.VISIBLE
-            Glide.with(this@MainActivity)
-                    .load(posterImageUrl)
-                    .into(vPoster)
+            genres?.let {
+                vGenre.text = "{md-local-offer} ${Util.getGenres(genres)}"
+            }
+            releaseDate?.let {
+                vReleaseDate.text = "{md-access-time} ${it.toFormattedString()}"
+            }
+            posterImagePath?.let {
+                Glide.with(this@MainActivity)
+                        .load(Util.getPosterImageUrl(it))
+                        .into(vPoster)
+            }
         }
     }
 

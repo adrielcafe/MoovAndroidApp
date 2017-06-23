@@ -5,15 +5,15 @@
     android:id="@+id/vCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorAccent"
-    app:cardUseCompatPadding="true"
-    app:cardElevation="4dp"
-    app:cardCornerRadius="4dp">
+    app:cardUseCompatPadding="false"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="0dp"
+    app:cardBackgroundColor="@android:color/transparent">
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/vBackdrop"
+        android:id="@+id/vPoster"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:scaleType="centerCrop"/>
 
 </android.support.v7.widget.CardView>

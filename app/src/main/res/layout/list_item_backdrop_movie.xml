@@ -5,11 +5,10 @@
     android:id="@+id/vCard"
     android:layout_width="300dp"
     android:layout_height="169dp"
-    android:layout_gravity="center"
-    android:background="@color/colorAccent"
     app:cardUseCompatPadding="true"
     app:cardElevation="4dp"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    app:cardBackgroundColor="@color/colorAccent">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/vBackdrop"

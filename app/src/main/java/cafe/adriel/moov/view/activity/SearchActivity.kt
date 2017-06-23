@@ -3,7 +3,7 @@ package cafe.adriel.moov.view.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import cafe.adriel.moov.Constant
@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_search.*
 class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
     lateinit var presenter: MovieContract.IMovieSearchPresenter
     lateinit var adapter: FastItemAdapter<SearchMovieAdapterItem>
-    lateinit var footerAdapter: FooterAdapter<ProgressItem>
+    lateinit var loadingAdapter: FooterAdapter<ProgressItem>
     var currentQuery: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,7 @@ class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
         }
 
         adapter = FastItemAdapter()
-        footerAdapter = FooterAdapter<ProgressItem>()
+        loadingAdapter = FooterAdapter<ProgressItem>()
         with(adapter) {
             withSelectable(false)
             withOnClickListener { v, adapter, item, position ->
@@ -53,14 +53,14 @@ class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
         }
 
         with(vMovies){
-            layoutManager = LinearLayoutManager(this@SearchActivity)
+            layoutManager = GridLayoutManager(this@SearchActivity, 3)
             itemAnimator = DefaultItemAnimator()
-            adapter = footerAdapter.wrap(this@SearchActivity.adapter)
+            adapter = loadingAdapter.wrap(this@SearchActivity.adapter)
             setHasFixedSize(true)
-            addOnScrollListener(object: EndlessRecyclerOnScrollListener(footerAdapter){
+            addOnScrollListener(object: EndlessRecyclerOnScrollListener(loadingAdapter){
                 override fun onLoadMore(currentPage: Int) {
-                    footerAdapter.clear()
-                    footerAdapter.add(ProgressItem().withEnabled(false))
+                    loadingAdapter.clear()
+                    loadingAdapter.add(ProgressItem().withEnabled(false))
                     currentQuery?.let {
                         presenter.searchMovies(it, currentPage)
                     }
@@ -106,6 +106,7 @@ class SearchActivity: BaseActivity(), MovieContract.IMovieSearchView{
                     adapter.add(SearchMovieAdapterItem(movie))
                 }
                 .addTo(disposables)
+        loadingAdapter.clear()
     }
 
     override fun showMovieDetails(movie: Movie) {

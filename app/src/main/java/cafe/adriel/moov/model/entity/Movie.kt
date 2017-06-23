@@ -10,10 +10,10 @@ data class Movie(
         @SerializedName("overview")
         val overview: String?,
         @SerializedName("poster_path")
-        val posterImageUrl: String?,
+        val posterImagePath: String?,
         @SerializedName("backdrop_path")
-        val backdropImageUrl: String?,
+        val backdropImagePath: String?,
         @SerializedName("genre_ids")
-        val genre: List<Int>?,
+        val genres: List<Int>?,
         @SerializedName("release_date")
         val releaseDate: Date?) : AutoParcelable

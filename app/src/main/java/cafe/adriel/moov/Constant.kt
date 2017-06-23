@@ -1,11 +1,19 @@
 package cafe.adriel.moov
 
+import android.graphics.drawable.ColorDrawable
+import android.support.v4.content.res.ResourcesCompat
+
 object Constant {
+
+    val imagePlaceholder = ColorDrawable(ResourcesCompat.getColor(
+            App.context.resources, R.color.colorAccent, null))
 
     const val EXTRA_MOVIE = "movie"
 
     const val TMDB_KEY = "1f54bd990f1cdfb230adb312546d765d"
-    const val TMDB_BASE_URL = "https://api.themoviedb.org/3/"
+    const val TMDB_API_BASE_URL = "https://api.themoviedb.org/3/"
+    const val TMDB_POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342/"
+    const val TMDB_BACKDROP_BASE_URL = "https://image.tmdb.org/t/p/w300"
     const val TMDB_LANGUAGE = "en-US"
     const val TMDB_REGION = "US"
     val TMDB_GENRES = mapOf(

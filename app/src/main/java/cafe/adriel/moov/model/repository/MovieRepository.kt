@@ -16,7 +16,7 @@ object MovieRepository: MovieContract.IMovieRepository {
 
     init {
         val retrofit = Retrofit.Builder()
-                .baseUrl(Constant.TMDB_BASE_URL)
+                .baseUrl(Constant.TMDB_API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
