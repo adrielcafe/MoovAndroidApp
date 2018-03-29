@@ -1,8 +1,10 @@
-![logo](https://raw.githubusercontent.com/adrielcafe/MoovAndroidApp/dev/logo.png)
+![logo](logo.png)
 
 **Moov** is an open source Android app made for test some architecture and UX concepts.
 
-![logo](https://raw.githubusercontent.com/adrielcafe/MoovAndroidApp/dev/screenshots/0_all_screens.png)
+[Sample app](moov.apk)
+
+![logo](screenshots/0_all_screens.png)
 
 ## Demo Video
 [![demo](https://img.youtube.com/vi/egYuyqEtFGo/0.jpg)](https://www.youtube.com/watch?v=egYuyqEtFGo)
